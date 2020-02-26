@@ -599,11 +599,10 @@ static bool check_for_block(struct wakeup_source *ws)
 
 		if(strstr(list_wl_search, wakelock_name) == NULL)
 			return false;
-	}
 
-    // wake lock is in list, print it if debug mode on
-	if (wl_blocker_debug)
-		printk("Boeffla WL blocker: %s blocked\n", ws->name);
+		// wake lock is in list, print it if debug mode on
+		if (wl_blocker_debug)
+			printk("Boeffla WL blocker: %s blocked\n", ws->name);
 
 		// if it is currently active, deactivate it immediately + log in debug mode
 		if (ws->active)
@@ -617,7 +616,6 @@ static bool check_for_block(struct wakeup_source *ws)
 		// finally block it
 		return true;
 	}
-
 
 	// there was no valid ws structure, do not block by default
 	return false;
