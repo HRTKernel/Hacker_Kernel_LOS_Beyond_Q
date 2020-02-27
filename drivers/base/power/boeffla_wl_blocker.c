@@ -1,7 +1,8 @@
 /*
  * Author: andip71, 01.09.2017
+ * Author: thehacker911, 26.02.2020
  *
- * Version 1.1.0
+ * Version 1.2.0
  *
  * This software is licensed under the terms of the GNU General Public
  * License version 2, as published by the Free Software Foundation, and
@@ -16,6 +17,9 @@
 
 /*
  * Change log:
+ *
+ * 1.2.0 (20.02.2020)
+ *   - Add wakelock_blocker database
  *
  * 1.1.0 (01.09.2017)
  *   - By default, the following wakelocks are blocked in an own list
