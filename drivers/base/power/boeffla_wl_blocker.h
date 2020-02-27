@@ -17,7 +17,11 @@
 
 #define BOEFFLA_WL_BLOCKER_VERSION	"1.2.0"
 
-#define LIST_WL_DEFAULT				LIST_WL_SMG97XF /* set to your list, default list = LIST_WL_DEFAULT_VAR	*/
+#ifdef BOEFFLA_WL_BLOCKER_DEV_SETTING
+		#define LIST_WL_DEFAULT				LIST_WL_SMG97XF // set to your list
+	#else
+		#define LIST_WL_DEFAULT				LIST_WL_DEFAULT_VAR	 // default list = LIST_WL_DEFAULT_VAR
+#endif
 
 #define LENGTH_LIST_WL				255
 #define LENGTH_LIST_WL_DEFAULT		100
@@ -28,8 +32,8 @@
 /*****************************************/
 
 // Default
-#define LIST_WL_DEFAULT_VAR			"wlan_rx_wake;qcom_rx_wakelock;wlan;wlan_wow_wl;wlan_extscan_wl;netmgr_wl;NETLINK"
+#define LIST_WL_DEFAULT_VAR			"wlan_rx_wake"
 
 // Galaxy S10
-#define LIST_WL_SMG97XF				"wlan_rx_wake;NETLINK"
+#define LIST_WL_SMG97XF				"wlan_rx_wake;NETLINK" //Aosp
 #define LIST_TESTING				"19030000.decon_f;ssp_comm_wake_lock;GPSD;ssp_wake_lock;tsp_wakelock;umts_ipc0;umts_ipc1;mmc0_detect"

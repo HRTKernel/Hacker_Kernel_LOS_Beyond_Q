@@ -316,4 +316,9 @@ config CPU_PM
 config BOEFFLA_WL_BLOCKER
 	bool "Boeffla generic wakelock blocker driver"
 	depends on PM
+	default N
+
+config BOEFFLA_WL_BLOCKER_DEV_SETTING
+	bool "Boeffla generic wakelock blocker developer list driver"
+	depends on PM
 	default N	
