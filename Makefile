@@ -5,6 +5,11 @@ SUBLEVEL = 113
 EXTRAVERSION =
 NAME = Petit Gorille
 
+#Build Tools
+TOOLCHAIN_DIR = toolchains/aarch64-linux-android-4.9/bin/aarch64-linux-android-
+CLANG_DIR = toolchains/$(CLANG_VERSION)/bin
+CLANG_VERSION = clang-r353983c
+
 # *DOCUMENTATION*
 # To see a list of typical targets execute "make help"
 # More info can be located in ./README
@@ -315,7 +320,7 @@ SUBARCH := $(shell uname -m | sed -e s/i.86/x86/ -e s/x86_64/x86/ \
 #ARCH		?= $(SUBARCH)
 #CROSS_COMPILE	?= $(CONFIG_CROSS_COMPILE:"%"=%)
 ARCH            ?= arm64
-CROSS_COMPILE   ?=$(srctree)/toolchains/aarch64-linux-android-4.9/bin/aarch64-linux-android-
+CROSS_COMPILE   ?=$(srctree)/$(TOOLCHAIN_DIR)
 
 # Architecture as present in compile.h
 UTS_MACHINE 	:= $(ARCH)
@@ -378,7 +383,7 @@ AS		= $(CROSS_COMPILE)as
 LD		= $(CROSS_COMPILE)ld
 LDGOLD		= $(CROSS_COMPILE)ld.gold
 #CC		= $(CROSS_COMPILE)gcc
-CC              = $(srctree)/toolchains/clang-r353983c/bin/clang
+CC              = $(srctree)/$(CLANG_DIR)/clang
 CPP		= $(CC) -E
 AR		= $(CROSS_COMPILE)ar
 NM		= $(CROSS_COMPILE)nm
@@ -393,8 +398,10 @@ PERL		= perl
 PYTHON		= python
 CHECK		= sparse
 
+ifeq ($(CONFIG_EXYNOS_FMP_FIPS),)
 READELF        = $(CROSS_COMPILE)readelf
 export READELF
+endif
 
 CHECKFLAGS     := -D__linux__ -Dlinux -D__STDC__ -Dunix -D__unix__ \
 		  -Wbitwise -Wno-return-void $(CF)
@@ -512,7 +519,7 @@ endif
 ifeq ($(cc-name),clang)
 ifneq ($(CROSS_COMPILE),)
 #CLANG_TRIPLE	?= $(CROSS_COMPILE)
-CLANG_TRIPLE    ?= $(srctree)/toolchains/clang-r353983c/bin/aarch64-linux-gnu-
+CLANG_TRIPLE    ?= $(srctree)/$(CLANG_DIR)/aarch64-linux-gnu-
 CLANG_FLAGS	:= --target=$(notdir $(CLANG_TRIPLE:%-=%))
 GCC_TOOLCHAIN_DIR := $(dir $(shell which $(CROSS_COMPILE)elfedit))
 CLANG_FLAGS	+= --prefix=$(GCC_TOOLCHAIN_DIR)
